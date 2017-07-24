@@ -9,7 +9,7 @@ if (prompt === 'my-tweets') {
 } else if (prompt === "movie-this") {
   liri.movieInfo(process.argv[3]);
 } else if (prompt === "do-what-it-says") {
-  pass();
+  liri.readTxt();
 } else {
   console.log("I dont know how to do that yet...");
   console.log("please select a command out of the list bellow");
