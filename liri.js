@@ -13,7 +13,7 @@ var client = new Twitter({
   access_token_secret: keys.twitterKeys.access_token_secret
 });
 
-exports.getTweets = function() {
+var getTweets = exports.getTweets = function() {
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (!error) {
       var data = JSON.parse(response.body).length;
@@ -37,7 +37,7 @@ var spotify = new Spotify({
   secret: keys.Spotify.secret
 });
 
-exports.songInfo = function(userQuerry) {
+var songInfo = exports.songInfo = function(userQuerry) {
   if (userQuerry === undefined) {
     userQuerry = "The Sign";
   }
@@ -56,7 +56,10 @@ exports.songInfo = function(userQuerry) {
 
 //IMDB
 var request = require('ajax-request');
-exports.movieInfo = function(querry) {
+var movieInfo = exports.movieInfo = function(querry) {
+  if (querry === undefined) {
+    querry = "Mr. Nobody";
+  }
   var link = "http://www.omdbapi.com/?apikey=40e9cece&t=" + querry;
   request({
     url: link,
@@ -72,4 +75,23 @@ exports.movieInfo = function(querry) {
     console.log("Actors: " + (JSON.parse(body)).Actors);
   });
 
+};
+
+//FS NODE COMMAND
+var fs = require('fs');
+exports.readTxt = function() {
+  fs.readFile("random.txt", 'utf8', function(err, data) {
+  if (err) throw err;
+
+  var data1 = data.split(/[",]+/);
+
+  if (data1[0] === 'my-tweets') {
+    getTweets();
+  } else if (data1[0] === "spotify-this-song") {
+    songInfo(data1[2]);
+  } else if (data1[0] === "movie-this") {
+    movieInfo(data[2]);
+  }
+
+});
 };
