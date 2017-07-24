@@ -1,0 +1,17 @@
+{
+  "name": "liri",
+  "version": "1.0.0",
+  "description": "class node project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "moi",
+  "license": "ISC",
+  "dependencies": {
+    "ajax-request": "^1.2.3",
+    "node-spotify-api": "^1.0.5",
+    "path": "^0.12.7",
+    "twitter": "^1.7.1"
+  }
+}
